@@ -1,8 +1,8 @@
 package com.edstem.book.controller;
 
-import com.edstem.book.contract.BookResponse;
-import com.edstem.book.model.Book;
+import com.edstem.book.contract.BookDto;
 import com.edstem.book.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
 
@@ -20,29 +20,29 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/findAllBooks")
-    public ResponseEntity<List<BookResponse>> findAllBooks() {
+    @GetMapping
+    public ResponseEntity<List<BookDto>> findAllBooks() {
         return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
     }
 
-    @GetMapping("/getBookById/{id}")
-    public ResponseEntity<BookResponse> getBookById(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDto> getBookById(@PathVariable int id) {
         return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/addBook")
-    public ResponseEntity<BookResponse> addBook(@RequestBody Book book) {
-        BookResponse bookResponse = bookService.addBook(book);
-        return new ResponseEntity<>(bookResponse, HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<BookDto> addBook(@Valid  @RequestBody BookDto book) {
+        BookDto bookDto = bookService.addBook(book);
+        return new ResponseEntity<>(bookDto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/updateBookById/{id}")
-    public ResponseEntity<BookResponse> updateBookById(@PathVariable int id, @RequestBody Book book) {
-        BookResponse updatedBook = bookService.updateBookById(id, book);
+    @PostMapping("/{id}")
+    public ResponseEntity<BookDto> updateBookById(@PathVariable int id, @Valid @RequestBody BookDto book) {
+        BookDto updatedBook = bookService.updateBookById(id, book);
         return new ResponseEntity<>(updatedBook, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteBookById/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBookById(@PathVariable int id) {
         bookService.deleteBookById(id);
         return ResponseEntity.ok("Book with ID " + id + " has been deleted");
