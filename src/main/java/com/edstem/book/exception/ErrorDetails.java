@@ -13,14 +13,10 @@ public class ErrorDetails {
 	private String message;
 	private String details;
 	
-	public ErrorDetails(LocalDateTime timestamp, String message, String details) {
-		super();
-		this.timestamp = timestamp;
-		this.message = message;
-		this.details = details;
+
 	}
 
 
 	
 
-}
+

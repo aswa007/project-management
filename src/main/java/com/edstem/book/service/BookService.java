@@ -37,9 +37,8 @@ public class BookService {
     }
 
     public BookDto addBook(BookDto bookDto) {
-        Book bookEntity= modelMapper.map(bookDto,Book.class);
-        Book savedBook = bookRepository.save(bookEntity);
-        return modelMapper.map(savedBook, BookDto.class);
+        Book bookEntity = bookRepository.save(modelMapper.map(bookDto, Book.class));
+        return modelMapper.map(bookEntity, BookDto.class);
     }
 
     public BookDto updateBookById(int id, BookDto book) {

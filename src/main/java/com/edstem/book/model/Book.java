@@ -1,40 +1,37 @@
 package com.edstem.book.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
 @Entity
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name ="book_details")
+@Table(name = "book_details")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
-
     @NotBlank(message = "Title cannot be blank")
-    @Size(max = 100, message = "Title cannot exceed 100 characters")
+    @Size(min = 3, message = "Title must be minimum 3 characters")
     private String title;
 
-
     @NotBlank(message = "Author cannot be blank")
-    @Size(max = 100, message = "Author cannot exceed 100 characters")
+    @Length(min = 3, message = "Author must be minimum 3 characters")
     private String author;
 
-    @NotNull(message = "Isbn cannot be null")
+    @Min(value = 1, message = "ISBN must be a positive value")
     private long isbn;
 
     @PastOrPresent(message = "Publication date must be in past or present")
