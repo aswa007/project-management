@@ -3,32 +3,23 @@ package com.edstem.book.contract;
 import com.edstem.book.validation.ValidAuthor;
 import com.edstem.book.validation.ValidIsbn;
 import com.edstem.book.validation.ValidTitle;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Size;
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class BookDto {
     private Integer id;
 
-    @ValidTitle
-    private String title;
+    @ValidTitle private String title;
 
+    @ValidAuthor private String author;
 
-    @ValidAuthor
-    private String author;
-
-    @ValidIsbn
-    private long isbn;
+    @ValidIsbn private long isbn;
 
     @PastOrPresent(message = "Publication date must be in past or present")
     private LocalDate publicationDate;

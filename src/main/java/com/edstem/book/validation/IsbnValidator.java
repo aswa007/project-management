@@ -1,17 +1,14 @@
 package com.edstem.book.validation;
 
-
 import com.edstem.book.repository.BookRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 
 public class IsbnValidator implements ConstraintValidator<ValidIsbn, Long> {
     private final BookRepository bookRepository;
 
     public IsbnValidator(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-
     }
 
     @Override
@@ -20,6 +17,4 @@ public class IsbnValidator implements ConstraintValidator<ValidIsbn, Long> {
 
         return !bookRepository.existsByIsbn(isbn);
     }
-
-
 }

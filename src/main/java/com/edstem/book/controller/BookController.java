@@ -3,12 +3,11 @@ package com.edstem.book.controller;
 import com.edstem.book.contract.BookDto;
 import com.edstem.book.service.BookService;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/books")
@@ -31,13 +30,14 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookDto> addBook(@Valid  @RequestBody BookDto book) {
+    public ResponseEntity<BookDto> addBook(@Valid @RequestBody BookDto book) {
         BookDto bookDto = bookService.addBook(book);
         return new ResponseEntity<>(bookDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookDto> updateBookById(@PathVariable int id, @Valid @RequestBody BookDto book) {
+    public ResponseEntity<BookDto> updateBookById(
+            @PathVariable int id, @Valid @RequestBody BookDto book) {
         BookDto updatedBook = bookService.updateBookById(id, book);
         return new ResponseEntity<>(updatedBook, HttpStatus.OK);
     }
@@ -47,5 +47,4 @@ public class BookController {
         bookService.deleteBookById(id);
         return ResponseEntity.ok("Book with ID " + id + " has been deleted");
     }
-
 }
