@@ -1,16 +1,17 @@
-package com.edstem.book.validation;
+package com.edstem.book.validation.library;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+
 import java.lang.annotation.*;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = IsbnValidator.class)
+@Constraint(validatedBy = UserIdValidator.class)
 @Documented
-public @interface ValidIsbn {
+public @interface ValidUserId {
 
-    String message() default "Isbn provided is not valid";
+    String message() default "Rented user id should be provided";
 
     Class<?>[] groups() default {};
 

@@ -1,8 +1,8 @@
 package com.edstem.book.contract;
 
-import com.edstem.book.validation.ValidAuthor;
-import com.edstem.book.validation.ValidIsbn;
-import com.edstem.book.validation.ValidTitle;
+import com.edstem.book.validation.books.ValidAuthor;
+import com.edstem.book.validation.books.ValidIsbn;
+import com.edstem.book.validation.books.ValidTitle;
 import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import lombok.*;

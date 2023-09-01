@@ -1,4 +1,4 @@
-package com.edstem.book.validation;
+package com.edstem.book.validation.books;
 
 import com.edstem.book.repository.BookRepository;
 import jakarta.validation.ConstraintValidator;
